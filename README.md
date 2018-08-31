@@ -1,5 +1,5 @@
 # prediction-validation
-Jialu You
+**Jialu You**
 
 1. [Programming Language](README.md#programming-language)
 1. [Approach Summary](README.md#approach-summary)
@@ -17,7 +17,7 @@ This project is written in Python without using additional libraries.
 
 I first import the two datasets as two lists of lists, with each line containing variables of "Time", "Time + Stock Name", and "Price", and then store each variable as a list. The defined variable `tstock` is a list of concatenated strings of "Time + Stock Name" to cross reference the two datasets more conveniently. For instance, `actual_tstock = ['1EDMMCA', '1AMDDPW', '1YZSGPL', '1CCKENL' ...]`.
 
-I then pair predicted `pred_tstock` and predicted price into a dictionary called `pred_tstock_dict` instead of a list to reduce complexity, and store their orders in a variable called `ind_dict`, which captures the index of each pair of key/value in the predicted dictionary. To cross reference actual data and predicted data, I run through the `actual_tstock` and pair each stock at different time its corresponding predicted price and absolute error (if any). And if the `actual_tstock` is not in the `pred_tstock_dict`, the predicted price and absolute will be noted as "no data present" and "ignore" respectively.
+I then pair predicted `pred_tstock` and predicted price into a dictionary called `pred_tstock_dict` instead of a list to reduce complexity, and store their orders in a variable called `ind_dict`, which captures the index of each pair of key/value in the predicted dictionary. To cross reference actual data and predicted data, I run through the `actual_tstock` and pair each stock at different time its corresponding predicted price and absolute error (if any). And if the `actual_tstock` is not in the `pred_tstock_dict`, the predicted price and absolute will be noted as `"no data present"` and `"ignore"` respectively.
 
 2. Calculate average error over a sliding time window:
 
@@ -43,7 +43,7 @@ In this way, I obtain the `average error` by calculating the average difference 
 ## Edge cases
 
 1. The start time may not always be 1 for every cases. Therefore, the number of windows is `# of windows = max actual time - min actual time - window + 2` instead of `# of windows = max actual time - window + 1`. Designed test_2 in test suite covers this case.
-2. There might be missing window in predicted data, since it contains only **high confidence predictions**. When I am not able to find a match between stock and price for a given window, I output "NA" to be the average error. Designed test_3 in test suite covers this case.
+2. There might be missing window in predicted data, since it contains only high confidence predictions. When I am not able to find a match between stock and price for a given window, I output "NA" to be the average error. Designed test_3 in test suite covers this case.
 
 ## Notes
 
